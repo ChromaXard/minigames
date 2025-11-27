@@ -7,11 +7,13 @@ services:
     volumes:
       - db-data:/var/lib/postgresql
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=adminpassword
-      - POSTGRES_DB=minigamesdb    
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}    
     ports:
       - "5432:5432"
+    labels:
+      - traefik.enable=false
   backend:
     build:
       context: ./backend
@@ -23,18 +25,18 @@ services:
     volumes:
       - ./backend:/app
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=${BACK_NODE_ENV}
       - PORT=3000
-      - DATABASE_URL=postgresql://admin:adminpassword@database:5432/minigamesdb
-      - JWT_SECRET=a0c5854f84bba853fdd08c8ecb943a88e500410698c77928b74a2eb5d7ca6443ac6a27313a440d32f1b1ad66709128c52f68410e2b3d94c57a8f8af38696757a
+      - DATABASE_URL=${BACK_DATABASE_URL}
+      - JWT_SECRET=${BACK_JWT_SECRET}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.minigamesBackend.rule=Host(`api.dev.akastler.fr`)"
+      - "traefik.http.routers.minigamesBackend.rule=Host(`${API_HOST}`)"
       - "traefik.http.routers.minigamesBackend.entrypoints=websecure"
       - "traefik.http.routers.minigamesBackend.tls.certresolver=le"
       - "traefik.http.services.minigamesBackend.loadbalancer.server.port=3000"
       # redirect http to https
-      - "traefik.http.routers.minigamesBackend-http.rule=Host(`api.dev.akastler.fr`)"
+      - "traefik.http.routers.minigamesBackend-http.rule=Host(`${API_HOST}`)"
       - "traefik.http.routers.minigamesBackend-http.entrypoints=web"
       - "traefik.http.routers.minigamesBackend-http.middlewares=redirect-to-https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
@@ -49,16 +51,16 @@ services:
     expose:
       - "3000"
     environment:
-      - NODE_ENV=development
-      - NEXT_PUBLIC_URL=http://dev.akastler.fr
+      - NODE_ENV=${FRONT_NODE_ENV}
+      - NEXT_PUBLIC_URL=${FRONT_NEXT_PUBLIC_URL}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.minigamesFrontend.rule=Host(`dev.akastler.fr`)"
+      - "traefik.http.routers.minigamesFrontend.rule=Host(`${FRONT_HOST}`)"
       - "traefik.http.routers.minigamesFrontend.entrypoints=websecure"
       - "traefik.http.routers.minigamesFrontend.tls.certresolver=le"
       - "traefik.http.services.minigamesFrontend.loadbalancer.server.port=3000"
       # redirect http to https
-      - "traefik.http.routers.minigamesFrontend-http.rule=Host(`dev.akastler.fr`)"
+      - "traefik.http.routers.minigamesFrontend-http.rule=Host(`${FRONT_HOST}`)"
       - "traefik.http.routers.minigamesFrontend-http.entrypoints=web"
       - "traefik.http.routers.minigamesFrontend-http.middlewares=redirect-to-https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
