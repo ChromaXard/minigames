@@ -18,6 +18,8 @@ Si vous souhaitez plus de détails n'hésitez pas a aller voir la roadmap ou je 
 
 ## Partie technique
 
+### Description
+
 Malgré que c'est censé être un minimum logique, la partie technique n'est pas accessible a toute personnes, du moins ça peut être incompréhensible pour certains.  
 Du coup pour faire vite histoire de pas prendre trop de temps, le site est composé de trois parties :
 - base de données
@@ -36,3 +38,16 @@ Du coup pour faire vite histoire de pas prendre trop de temps, le site est compo
 Du coup, avec tout ça vous auriez peut etre envie de me dire, où est "l'orchestrateur avec quoi tu les lances ?", ou encore "tu utilises un reverse proxy, genre nginx ?"  
 Je vais d'avance répondre au questions, pour le lancement je fait tout a la main avec docker compose, pas de K3s, K8s, pas de solution de déploiement automatisé pour l'instant.  
 Quant au reverse proxy, vu que je fais tout directement sur le vps, j'utilise mon reverse proxy global dessus qui est traefik, ça me permait de setup les noms de domaines assez rapidement avec les labels (sans oublier d'ajouter la redirection chez son gestionnaire genre ovh, hostinger, namecheap ou autre).
+
+### Arborescence
+```text
+.
+├── LICENSE -> la licence du projet
+├── Makefile -> Makefile classique avec up up-build, down, down-volumes, restart, logs et ps
+├── README.md -> Le fichier que vous êtes en train de lire
+├── ROADMAP.md -> La roadmap du projet
+├── backend -> toute la partie backend fait avec express et autre
+├── database -> Ma modification de l'image pour la basse de donnée
+├── docker-compose.yml -> le docker compose de dev (pas encore de prod setup)
+└── front -> toute la partie front next
+```
