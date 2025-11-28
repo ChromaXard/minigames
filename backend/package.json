@@ -22,6 +22,7 @@
     "drizzle-orm": "^0.44.7",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^7.0.11",
     "pg": "^8.16.3",
     "socket.io": "^4.8.1",
     "tsx": "^4.20.6"
@@ -32,6 +33,7 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.5",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/nodemailer": "^7.0.4",
     "@types/pg": "^8.15.6",
     "drizzle-kit": "^0.31.7"
   }

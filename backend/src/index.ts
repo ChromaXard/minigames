@@ -79,9 +79,20 @@ io.on("connection", (socket) => {
   });
 });
 
+import {checkSmtpConnection} from "@/mail/tools.js";
 
-httpServer.listen(PORT, () => { 
+httpServer.listen(PORT, async () => { 
   console.log("Server running at PORT: ", PORT);
+  try {
+    const smtpOk = await checkSmtpConnection();
+    if (smtpOk) {
+      console.log("SMTP connection verified successfully.");
+    } else {
+      console.error("Failed to verify SMTP connection.");
+    }
+  } catch (error) {
+    console.error("Error verifying SMTP connection:", error);
+  }
 }).on("error", (error) => {
   // gracefully handle error
   throw new Error(error.message);
