@@ -4,12 +4,12 @@ export default router;
 
 import { verifyEmail, verifyPassword, verifyUsername } from "./verifyTools";
 import { hashPassword, comparePassword } from "./hashTools";
-import db from "../../db/global";
-import { usersTable } from "../../db/schema";
 import { generateToken, deleteToken, verifyToken } from "./tokenTools";
-import {authMiddleware} from "../../middlewares/authMiddleware";
-import { eq } from "drizzle-orm";
+import {authMiddleware} from "@/middlewares/authMiddleware";
 import { sendConfirmationEmail } from "./authTools";
+import db from "@/db/global";
+import { usersTable } from "@/db/schema";
+import { eq } from "drizzle-orm";
 
 function parseRequestBody(req: express.Request, argsNeeded: {name: string, type: string}[]): Record<string, any> {
     const ret: Record<string, any> = {};

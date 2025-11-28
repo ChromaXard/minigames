@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 
-import { verifyToken } from "../routes/auth/tokenTools";
+import { verifyToken } from "@/routes/auth/tokenTools";
 
-import db from "../db/global";
-import { usersTable } from "../db/schema";
+import db from "@/db/global";
+import { usersTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 async function authMiddleware(req: Request, res: Response, next: NextFunction) {

@@ -1,4 +1,4 @@
-import { pgTable, varchar, pgEnum, integer, uuid, text, boolean } from "drizzle-orm/pg-core";
+import { pgTable, varchar, pgEnum, integer, uuid, boolean } from "drizzle-orm/pg-core";
 
 export const tokenTypeEnum = pgEnum("token_type", ["ACCESS", "REFRESH", "CONFIRMATION", "RESET"]);
 

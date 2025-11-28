@@ -17,8 +17,8 @@ app.use(cors({
   credentials: true,
 }));
 
-import authRouter from "./routes/auth/route.js";
-import profilesRouter from "./routes/users/route.js";
+import authRouter from "@/routes/auth/route.js";
+import profilesRouter from "@/routes/users/route.js";
 app.use("/auth", authRouter);
 app.use("/users", profilesRouter);
 
@@ -27,7 +27,7 @@ const httpServer = createServer(app);
 
 
 import { Server } from "socket.io";
-import { verifyToken } from "./routes/auth/tokenTools.js";
+import { verifyToken } from "@/routes/auth/tokenTools.js";
 const io = new Server(httpServer,
   {
     cors: {

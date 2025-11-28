@@ -43,9 +43,9 @@ services:
       - "traefik.docker.network=traefik-net"
   front:
     build:
-      context: ./front
+      context: ./frontend
     volumes:
-      - ./front:/app
+      - ./frontend:/app
     networks:
       - traefik-net
     expose:

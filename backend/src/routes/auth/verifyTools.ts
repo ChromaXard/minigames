@@ -1,5 +1,5 @@
-import db from "../../db/global";
-import { usersTable } from "../../db/schema";
+import db from "@/db/global";
+import { usersTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function verifyEmail(email: string) {

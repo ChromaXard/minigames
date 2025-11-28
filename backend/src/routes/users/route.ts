@@ -2,9 +2,9 @@ import express from "express";
 const router = express.Router();
 export default router;
 
-import {authMiddleware, confirmedMiddleware} from "../../middlewares/authMiddleware";
-import db from "../../db/global";
-import { usersTable } from "../../db/schema";
+import {authMiddleware, confirmedMiddleware} from "@/middlewares/authMiddleware";
+import db from "@/db/global";
+import { usersTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 async function getUserById(id: string) {
