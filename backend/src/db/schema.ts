@@ -9,7 +9,8 @@ export const usersTable = pgTable("users", {
   passwordHash: varchar().notNull(),
   confirmed: boolean().notNull().default(false),
   createdAt: integer().notNull().default(Math.floor(Date.now() / 1000)),
-  updatedAt: integer().notNull().default(Math.floor(Date.now() / 1000)),
+  updatedAt: integer().notNull().default(Math.floor(Date.now() / 1000)).$onUpdate(() => Math.floor(Date.now() / 1000)),
+  lastConfirmationMailAt: integer().notNull().default(0),
   profilePictureUrl: varchar().notNull().default("https://api.dev.akastler.fr/pictures/default-avatar.png"),
 });
 
