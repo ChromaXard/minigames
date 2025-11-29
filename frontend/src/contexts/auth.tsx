@@ -100,7 +100,8 @@ const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 			body: JSON.stringify({ email }),
 		});
         if (!res.ok) {
-            useAddPopup("resend-confirmation-error", "Une erreur est survenue lors de la demande de renvoi de l'email de confirmation.", "red");
+			const json = await res.json();
+            useAddPopup("resend-confirmation-error", json.message || "Une erreur est survenue lors de la demande de renvoi de l'email de confirmation.", "red");
         } else {
             useAddPopup("resend-confirmation-success", "L'email de confirmation a été renvoyé avec succès !", "green");
         }
