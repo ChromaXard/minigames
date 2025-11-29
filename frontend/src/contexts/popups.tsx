@@ -33,10 +33,9 @@ const PopupContextProvider: React.FC<{ children: React.ReactNode }> = ({
     const grayPopup = "bg-gray-500/75 border-gray-700";
     return (
         <PopupContext.Provider value={contextValue}>
-            <div id="popupArea" className="fixed top-5 left-5 z-50 flex flex-col  md:max-w-1/3 lg:max-w-1/4 overflow-auto">
+            <div id="popupArea" className="fixed top-5 left-5 z-50 flex flex-col  md:max-w-1/3 lg:max-w-1/4 overflow-auto max-h-1/2">
             {popups.map((popup, index) => (
                 <div key={index} className={`${popup.color === "green" ? greenPopup : popup.color === "red" ? redPopup : popup.color === "blue" ? bluePopup : grayPopup} text-white rounded-md p-2 mb-2 border border-1 w-fit flex items-center justify-between space-x-2`}>
-                {/* <span>{Array.isArray(popup.content) ? popup.content.join(" ") : popup.content}</span> */}
                 <div>
                     {Array.isArray(popup.content) ? popup.content.map((line, i) => (
                         <p key={i}>{line}</p>
