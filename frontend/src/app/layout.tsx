@@ -7,7 +7,6 @@ import { PopupContextProvider } from "@/contexts/popups";
 
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import { ProfileContextProvider } from "@/contexts/profile";
 import { SocketContextProvider } from "@/contexts/socket";
 
 const geistSans = Geist({
@@ -37,13 +36,11 @@ export default function RootLayout({
 			>
 				<PopupContextProvider>
 					<AuthContextProvider>
-						<ProfileContextProvider>
 							<SocketContextProvider>
 								<Header />
 								<main className="flex-1">{children}</main>
 								<Footer />
 							</SocketContextProvider>
-						</ProfileContextProvider>
 					</AuthContextProvider>
 				</PopupContextProvider>
 			</body>
