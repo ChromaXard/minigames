@@ -31,7 +31,7 @@ function parseRequestBody(req: express.Request, argsNeeded: {name: string, type:
 
 router.route("/verify")
     .get(authMiddleware, (req, res) => {
-        res.status(200).json({ message: "User is authenticated." });
+        res.status(200).json({ message: "L'utilisateur est authentifié." });
     });
 
 router.route("/login")
