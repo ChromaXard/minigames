@@ -22,7 +22,7 @@ const PopupContextProvider: React.FC<{ children: React.ReactNode }> = ({
         setPopups(prev => [...prev, { name, content, color }]);
         setTimeout(() => {
             setPopups(prev => prev.filter(popup => popup.name !== name));
-        }, 10 * 1000 ); // 10 seconds
+        }, 5 * 1000 ); // 5 seconds
     }
     useEffect(() => {
         setMounted(true);
