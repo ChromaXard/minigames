@@ -178,19 +178,22 @@ router.route("/resend-confirmation")
     .post(async (req, res) => {
         const { email } = req.body;
         if (!email || typeof email !== "string") {
-            return res.status(400).json({ message: "Email is required." });
+            return res.status(400).json({ message: "Un email est requis." });
         }
         try {
             const result = await db.select().from(usersTable).where(eq(usersTable.email, email));
             if (result.length === 0) {
-                return res.status(404).json({ message: "User with this email does not exist." });
+                return res.status(404).json({ message: "L'utilisateur avec cet email n'existe pas." });
             }
             const user = result[0];
             if (user.confirmed) {
-                return res.status(400).json({ message: "Email is already confirmed." });
+                return res.status(400).json({ message: "L'email est déjà confirmé." });
+            }
+            if (Math.floor(Date.now() / 1000) - user.lastConfirmationMailAt < 300) {
+                return res.status(429).json({ message: "Un email de confirmation a été envoyé récemment. Veuillez patienter avant d'en demander un autre." });
             }
             await sendConfirmationEmail(email, user.id, user.username);
-            return res.status(200).json({ message: "Confirmation email resent successfully." });
+            return res.status(200).json({ message: "Email de confirmation renvoyé avec succès." });
         } catch (error) {
             console.error("Error during resending confirmation email:", error);
             return res.status(500).json({ message: "Internal server error." });
