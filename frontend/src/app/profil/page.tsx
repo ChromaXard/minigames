@@ -1,10 +1,8 @@
 "use client";
 
-import { useProfile } from "@/hooks/useProfile";
-import { useSocket } from "@/hooks/useSocket";
-import { useEffect } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Profile() {
-    const profile = useProfile();
-    return <div>vous etes connecté en tant que : {profile?.username} {profile?.email} id : {profile?.userId}</div>;
+    const {userInformations} = useAuth();
+    return <div>vous etes connecté en tant que : {userInformations?.username} {userInformations?.email} id : {userInformations?.userId}</div>;
 }
